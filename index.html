@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web3 Wallet Connect</title>
+    <link rel="icon" type="image/svg+xml" href="xss.svg">
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+</head>
+<body>
+    <h1>Web3 Wallet Connection</h1>
+    <button id="connectWallet">Connect Wallet</button>
+    <p id="walletAddress">Your Address: Not connected</p>
+
+    <script>
+        document.getElementById("connectWallet").addEventListener("click", async function() {
+            if (window.ethereum) {
+                try {
+                    // Request account access
+                    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+                    const userAddress = accounts[0]; 
+
+                    // Display wallet address
+                    document.getElementById("walletAddress").innerText = "Your Address: " + userAddress;
+
+                } catch (error) {
+                    console.error("User denied access:", error);
+                }
+            } else {
+                alert("No Web3 provider found. Please install MetaMask.");
+            }
+        });
+    </script>
+</body>
+</html>
+
